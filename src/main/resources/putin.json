@@ -1,0 +1,16 @@
+{
+    "first_name": "Vladimir",
+    "last_name": "Vladimir",
+    "age": 6,
+    "skills":
+    [
+        {
+            "name": "Russian",
+            "level": 5
+        },
+        {
+            "name": "English",
+            "level": 1
+        }
+    ]
+}

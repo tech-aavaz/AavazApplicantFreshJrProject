@@ -1,0 +1,12 @@
+{
+    "first_name": "Joe",
+    "last_name": "Biden",
+    "age": 6,
+    "skills":
+    [
+        {
+            "name": "English",
+            "level": 5
+        }
+    ]
+}
