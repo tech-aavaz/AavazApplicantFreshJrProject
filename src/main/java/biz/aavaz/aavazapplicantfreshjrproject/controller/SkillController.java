@@ -1,6 +1,8 @@
 package biz.aavaz.aavazapplicantfreshjrproject.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -16,6 +18,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import biz.aavaz.aavazapplicantfreshjrproject.dao.SkillDao;
@@ -24,36 +27,19 @@ import biz.aavaz.aavazapplicantfreshjrproject.model.Skill;
 public class SkillController {
 	SkillDao skillDao = new SkillDao();
 
-	public void addSkill(String path) {
+	public void addSkill(String path) throws FileNotFoundException {
 		// deserialize the skill file at path using gson getting a skill object
 		// skill object should be saved with SkillDAO.save(skill)
-		Scanner input = new Scanner(System.in);
-		Skill skill = new Skill();
 
-		System.out.println("Enter Skill name :");
-		skill.setName(input.nextLine());
-
-		System.out.println("Enter Skill level :");
-		skill.setLevel(input.nextInt());
-
+		Gson gson = new Gson();
+		File file = new File(path);
+		file.setReadable(true);
+		JsonReader reader = new JsonReader(new FileReader(file));
+		Skill skill = gson.fromJson(reader, Skill.class);
 		skillDao.save(skill);
-
-		// writting json file
-		try {
-			File file = new File(path+skill.getName().toLowerCase() + ".json");
-			file.setWritable(true);
-			file.setReadable(true);
-			FileWriter fileWriter = new FileWriter(file);
-			new Gson().toJson(skill, fileWriter);
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
-	public void updateSkill(String path) {
+	public void updateSkill() {
 		Scanner input = new Scanner(System.in);
 		Skill skill = new Skill();
 
@@ -67,25 +53,9 @@ public class SkillController {
 		skill.setLevel(input.nextInt());
 
 		skillDao.update(skill);
-
-		// writting json file
-		try {
-			File file = new File(path+skill.getName().toLowerCase() + ".json");
-			file.setWritable(true);
-			file.setReadable(true);
-			FileWriter fileWriter = new FileWriter(file);
-			new Gson().toJson(skill, fileWriter);
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	public void printAllSkills() {
-		// SkillDAO.getAll
-		// sout the list
 		List<Skill> listOfSkill = skillDao.getAll();
 		listOfSkill.forEach(System.out::println);
 	}

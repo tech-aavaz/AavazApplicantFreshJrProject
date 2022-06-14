@@ -1,11 +1,12 @@
 package biz.aavaz.aavazapplicantfreshjrproject.view;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import biz.aavaz.aavazapplicantfreshjrproject.controller.SkillController;
 
 public class MainMenu {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		SkillController skillController = new SkillController();
 		boolean isContinue = true;
 
@@ -20,15 +21,18 @@ public class MainMenu {
 
 			case 1:// add skill
 				String path = "src/main/resources/skills/";
-				System.out.println("Default path is for file -> "
-				+ path + "\n1). Continue as default path"
+				System.out.println("Default path -> [ "
+				+ path + " ]\n1). Continue as default path"
 						+ "\n2). Use Custom path");
 				
 				Scanner userScanner = new Scanner(System.in);
 
 				if (userScanner.nextInt() == 2) {
-					System.out.println("Enter your custom path:");
-					path = userScanner.nextLine();
+					System.out.println("Enter custom path with including filename & extention:");
+					path = userScanner.next();
+				}else {
+					System.out.println("Enter filename with extention ( eq. english.json) :");
+					path =path+ userScanner.next();
 				}
 
 				skillController.addSkill(path);
@@ -37,17 +41,7 @@ public class MainMenu {
 				skillController.printAllSkills();
 				break;
 			case 3:
-				path = "/home/vsaini/Desktop/";
-				System.out.println("Default path is for file -> " + path + "\n1). Continue as default path"
-						+ "\n2). Use Custom path");
-				userScanner = new Scanner(System.in);
-
-				if (userScanner.nextInt() == 2) {
-					System.out.println("Enter your custom path:");
-					path = userScanner.nextLine();
-				}
-
-				skillController.updateSkill(path);
+				skillController.updateSkill();
 				break;
 			case 4:
 				skillController.printSkillById();
