@@ -1,21 +1,26 @@
 package biz.aavaz.aavazapplicantfreshjrproject.view;
 
-/**
- *
- * @author rchauhan
- */
 public class MainMenu {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+        
+        boolean isContinue=true;
+        
+        do{
         paintMenu();
+        //selected = readLine
+        //processInput(num) - set isContinue based on input
+        } while (isContinue);
     }
     
     public static void paintMenu(){
-        System.out.println("Add Skill with JSON");
-        System.out.println("Show Skills");
+        System.out.println("1. Add Skill with JSON");
+        System.out.println("2. Show Available Skills");
+    }
+    
+    public static int processInput(int num){
+        System.out.println("");
+        return 1;
     }
     
 }
