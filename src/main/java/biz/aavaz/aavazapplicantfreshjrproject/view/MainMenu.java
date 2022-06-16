@@ -1,75 +1,91 @@
 package biz.aavaz.aavazapplicantfreshjrproject.view;
 
+import biz.aavaz.aavazapplicantfreshjrproject.controller.SkillController;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import biz.aavaz.aavazapplicantfreshjrproject.controller.SkillController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainMenu {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		SkillController skillController = new SkillController();
-		boolean isContinue = true;
+    public static void main(String[] args) throws FileNotFoundException {
 
-		do {
-			paintMenu();
+        boolean isContinue = true;
 
-			switch (processInput()) {
-			case 0:// exit
-				System.out.println("Good bye");
-				isContinue = false;
-				break;
+        do {
+            paintMenu();
 
-			case 1:// add skill
-				String path = "src/main/resources/skills/";
-				System.out.println("Default path -> [ "
-				+ path + " ]\n1). Continue as default path"
-						+ "\n2). Use Custom path");
-				
-				Scanner userScanner = new Scanner(System.in);
+            switch (processInput()) {
 
-				if (userScanner.nextInt() == 2) {
-					System.out.println("Enter custom path with including filename & extention:");
-					path = userScanner.next();
-				}else {
-					System.out.println("Enter filename with extention ( eq. english.json) :");
-					path =path+ userScanner.next();
-				}
+                case 1:// add skill
+                    addSkill();
+                    break;
+                case 2:
+                    printSkills();
+                    break;
+                case 3:
+                    System.out.println("!!!!! To be implemented by candidate");
+                    break;
+                case 4:
+                    System.out.println("!!!!! To be implemented by candidate");
+                    break;
+                case 5:// exit
+                    System.out.println("Good bye");
+                    isContinue = false;
+                    break;
+                default:
+                    System.out.println("Invalid input. Please try again.");
+                    break;
+            }
 
-				skillController.addSkill(path);
-				break;
-			case 2:// Show Available Skills
-				skillController.printAllSkills();
-				break;
-			case 3:
-				skillController.updateSkill();
-				break;
-			case 4:
-				skillController.printSkillById();
-				break;
-			case 5:
-				skillController.deleteSkillById();
-				break;
-			default:
-				break;
-			}
+        } while (isContinue);
+    }
 
-		} while (isContinue);
-	}
+    public static void paintMenu() {
+        System.out.println("=========================");
+        System.out.println("1. Add a Skill by reading a JSON file");
+        System.out.println("2. Print all skills in database");
+        System.out.println("3. Add a User by reading a json file");
+        System.out.println("4. Get all Users by skill name");
+        System.out.println("5. Exit");
+    }
 
-	public static void paintMenu() {
-		System.out.println("=========================");
-		System.out.println("1. Add Skill with JSON");
-		System.out.println("2. Show Available Skills");
-		System.out.println("3. Upadte Skill by id");
-		System.out.println("4. Find Skill by id");
-		System.out.println("5. Delete Skill by id");
-		System.out.println("0. Exit");
-	}
+    public static int processInput() {
 
-	public static int processInput() {
-		Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
+        return input.nextInt();
+    }
 
-		return input.nextInt();
-	}
+    private static void addSkill() {
 
+        String defaultSkillsFolder = "src/main/resources/skills/";
+        String filePath = "";
+        SkillController skillController = new SkillController();
+
+        System.out.println("Default skills folder -> [" + defaultSkillsFolder + " ]");
+        System.out.println("1. Use default folder");
+        System.out.println("2. Specify full path");
+
+        Scanner userScanner = new Scanner(System.in);
+
+        if (userScanner.nextInt() == 2) {
+            System.out.println("Enter full path including filename & extention:");
+            filePath = userScanner.next();
+        } else {
+            System.out.println("Enter filename with extention ( eq. english.json) :");
+            filePath = defaultSkillsFolder + userScanner.next();
+        }
+
+        try {
+            skillController.addSkill(filePath);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("There was an error while processing");
+        }
+    }
+
+    private static void printSkills() {
+        System.out.println("!!!!! To be implemented by candidate");
+    }
 }
