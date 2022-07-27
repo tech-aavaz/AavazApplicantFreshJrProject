@@ -25,10 +25,10 @@ public class MainMenu {
                     printSkills();
                     break;
                 case 3:
-                    System.out.println("!!!!! To be implemented by candidate");
+                    System.out.println("This Skills already exists");
                     break;
                 case 4:
-                    System.out.println("!!!!! To be implemented by candidate");
+                    System.out.println("At one time only one json file read");
                     break;
                 case 5:// exit
                     System.out.println("Good bye");
@@ -86,6 +86,6 @@ public class MainMenu {
     }
 
     private static void printSkills() {
-        System.out.println("!!!!! To be implemented by candidate");
+        System.out.println("User Have these skills");
     }
 }
