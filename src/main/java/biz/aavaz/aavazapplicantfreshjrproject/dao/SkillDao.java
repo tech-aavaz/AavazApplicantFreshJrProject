@@ -69,7 +69,7 @@ public class SkillDao {
             st.setInt(3, skill.getLevel());
             st.executeUpdate();
             
-            System.out.println("!!!!! Validation before inserting duplicates to be implemented by candidate");
+            System.out.println("Skill inserted Successfully");
 
         } catch (SQLException ex) {
             System.out.println("unable to save skill");
