@@ -25,7 +25,9 @@ public class SkillController {
         file.setReadable(true);
         JsonReader reader = new JsonReader(new FileReader(file));
         Skill skill = gson.fromJson(reader, Skill.class);
+		User skill=gson.fromJson(reader,User.class);
         skillDao.save(skill);
+		skillDao.save(user);
     }
 
     public void printAllSkills() {
@@ -40,7 +42,7 @@ public class SkillController {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Enter skill id:");
-        Skill skill = skillDao.get(input.nextInt());
+        Skill skill = skillDao.get(input.nextLong());
 
         if (skill != null) {
             System.out.println(skill);
@@ -48,5 +50,27 @@ public class SkillController {
             System.out.println("Skill not found");
         }
     }
+
+	 public void printAllUsers() {
+
+        List<User> listOfUser = skillDao.getAll();
+
+        listOfUser.forEach(System.out::println);
+    }
+
+	public void printUserById() {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter user id:");
+        User user = skillDao.get(input.nextInt());
+
+        if (user != null) {
+            System.out.println(skill);
+        } else {
+            System.out.println("User not found");
+        }
+    }
+
 
 }
