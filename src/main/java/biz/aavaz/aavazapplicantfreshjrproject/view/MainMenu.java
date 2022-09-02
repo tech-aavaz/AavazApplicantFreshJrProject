@@ -25,10 +25,10 @@ public class MainMenu {
                     printSkills();
                     break;
                 case 3:
-                    System.out.println("!!!!! To be implemented by candidate");
+                    System.out.println("Enter 1 for Add skill");
                     break;
                 case 4:
-                    System.out.println("!!!!! To be implemented by candidate");
+                    System.out.println("Enter 2 for Print skill");
                     break;
                 case 5:// exit
                     System.out.println("Good bye");
@@ -86,6 +86,6 @@ public class MainMenu {
     }
 
     private static void printSkills() {
-        System.out.println("!!!!! To be implemented by candidate");
+        System.out.println("User have this skill knowlegde");
     }
 }
